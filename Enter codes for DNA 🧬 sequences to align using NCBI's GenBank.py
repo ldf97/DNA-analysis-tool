@@ -145,7 +145,10 @@ Code_1_index_2 = 100
 Code_2 = "NC_019843"  # Middle Eastern coronavirus strain
 Code_2_index_1 = 0
 Code_2_index_2 = 100
-
+Code_1_index_1=1
+Code_1_index_2=1
+Code_2_index_1=1
+Code_2_index_2=1
 col1, col2 = st.columns(2)
 
 # Input DNA code 1  and DNA code 2
@@ -190,6 +193,26 @@ Seq_B_record_description = Seq_B_record
 Seq_A_record_seq_full = get_seq_with_validation(Seq_A_record)
 Seq_B_record_seq_full = get_seq_with_validation(Seq_B_record)
 
+if Code_1_index_1:
+    pass
+else:
+    Code_1_index_1 = 0
+
+if Code_1_index_2:
+    pass
+else:
+    Code_1_index_2 = 0
+
+if Code_2_index_1:
+    pass
+else:
+    Code_2_index_1 = 0
+
+if Code_2_index_2:
+    pass
+else:
+    Code_2_index_2 = 0
+
 Seq_A_record_seq_indexed = Seq_A_record_seq_full[int(Code_1_index_1): int(Code_1_index_2)]
 Seq_B_record_seq_indexed = Seq_B_record_seq_full[int(Code_2_index_1): int(Code_2_index_2)]
 
@@ -201,10 +224,27 @@ st.write(Seq_B_record_description)
 
 # Output Alignment Using Codes
 st.subheader('Alignment using Codes')
-alignment_using_codes = global_alignment(Seq_A_record_seq_indexed, Seq_B_record_seq_indexed, gap_function)
+#if Seq_A_record_seq_indexed and Seq_B_record_seq_indexed:
+#    alignment_using_codes = global_alignment(Seq_A_record_seq_indexed, Seq_B_record_seq_indexed, gap_function)
+#else:
+#    alignment_using_codes = "Please enter NCBI DNA codes"
 # st.subheader(alignment)
 #st.text('Aligned Sequence using codes', alignment_using_codes)
 #st.text(alignment_using_codes)
-st.text(alignment_using_codes)
+#st.text(alignment_using_codes)
+#alignment_using_codes = global_alignment(Seq_A_record_seq_indexed, Seq_B_record_seq_indexed, gap_function)
+if Seq_A_record_seq_indexed and Seq_B_record_seq_indexed:
+    alignment_using_codes = global_alignment(Seq_A_record_seq_indexed, Seq_B_record_seq_indexed, gap_function)
+else:
+    alignment_using_codes = "Please enter NCBI DNA codes"
 
+
+if st.button(alignment_using_codes):
+
+    Seq_A_record_seq_indexed = Seq_A_record_seq_full[int(Code_1_index_1): int(Code_1_index_2)]
+    Seq_B_record_seq_indexed = Seq_B_record_seq_full[int(Code_2_index_1): int(Code_2_index_2)]
+    alignment_using_codes = global_alignment(Seq_A_record_seq_indexed, Seq_B_record_seq_indexed, gap_function)
+    st.text(alignment_using_codes)
+else:
+    st.write("Click Button above to align sequences")
 
