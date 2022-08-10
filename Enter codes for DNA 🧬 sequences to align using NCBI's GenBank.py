@@ -12,7 +12,7 @@ from Bio import Entrez
 
 # Adds a title
 st.write("""
-# DNA Sequence Alignment Application
+# DNA Sequence Analysis and Alignment Application
 
 This app aligns two sequences
 """)
